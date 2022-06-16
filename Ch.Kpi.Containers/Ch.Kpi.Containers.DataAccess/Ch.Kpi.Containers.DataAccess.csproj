@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ch.Kpi.Containers.Entities.Configuration\Ch.Kpi.Containers.Entities.Configuration.csproj" />
     <ProjectReference Include="..\Ch.Kpi.Containers.Entities\Ch.Kpi.Containers.Entities.csproj" />
   </ItemGroup>
 

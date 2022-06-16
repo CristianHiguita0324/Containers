@@ -13,6 +13,7 @@
 namespace Ch.Kpi.Containers.DataAccess.Context
 {
     using Ch.Kpi.Containers.DataAccess.Interfaces;
+    using Ch.Kpi.Containers.Entities.Configuration;
     using Microsoft.Extensions.Configuration;
     using MongoDB.Driver;
     public class MongoContext : IMongoContext
@@ -101,10 +102,9 @@ namespace Ch.Kpi.Containers.DataAccess.Context
                 return;
             }
 
-            // Configure mongo (You can inject the config, just to simplify)
-            mongoClient = new MongoClient(configuration["MongoSettings:Connection"]);
+            mongoClient = new MongoClient(configuration[ConfigurationConstants.ConnectionString]);
 
-            dataBase = mongoClient.GetDatabase(configuration["MongoSettings:DatabaseName"]);
+            dataBase = mongoClient.GetDatabase(configuration[ConfigurationConstants.DataBaseName]);
         }
     }
 }
