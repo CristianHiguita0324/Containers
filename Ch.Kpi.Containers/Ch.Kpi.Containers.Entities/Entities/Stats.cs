@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Container.cs" company="CristianHiguita">
+// <copyright file="Stats.cs" company="CristianHiguita">
 //    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
@@ -9,31 +9,24 @@
 //    OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
 
-namespace Ch.Kpi.Containers.Entities
+namespace Ch.Kpi.Containers.Entities.Entities
 {
-    public class Container
+    public class Stats
     {
         /// <summary>
-        /// The container name
+        /// The containers dispatched
         /// </summary>
-        [Required(ErrorMessage = constants.ContainerNameRequired)]
-        public string Name { get; set; }
+        public double ContainersDispatched { get; set; }
 
         /// <summary>
-        /// The transport cost
+        /// The containers not dispatched
         /// </summary>
-        
-        [Required(ErrorMessage = constants.TransportCostRequired)]
-        public double TransportCost { get; set; }
+        public double ContainersNotDispatched { get; set; }
 
         /// <summary>
-        /// The container price
+        /// The budget used
         /// </summary>
-        /// 
-        [Required(ErrorMessage = constants.ContainerPriceRequired)]
-        public double ContainerPrice { get; set; }
-
+        public double BudgetUsed { get; set; }
     }
 }

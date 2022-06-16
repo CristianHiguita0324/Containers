@@ -49,7 +49,7 @@ namespace Ch.Kpi.Containers.DataAccess.Test
         /// Creates the repository should create repository with data access.
         /// </summary>
         [TestMethod]
-        public void CreateRepository_ShouldCreateRepository_WithDataAccess()
+        public void CreateRepositoryShouldCreateRepositoryWithDataAccess()
         {
             // Act
             var repository = this.factory.CreateRepository<Container>();

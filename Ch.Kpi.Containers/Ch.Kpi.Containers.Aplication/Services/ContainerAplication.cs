@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StatsAplication.cs" company="CristianHiguita">
+// <copyright file="ContainerAplication.cs" company="CristianHiguita">
 //    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
@@ -14,31 +14,30 @@ namespace Ch.Kpi.Containers.Aplication.Services
 {
     using Ch.Kpi.Containers.Aplication.Interfaces;
     using Ch.Kpi.Containers.Domain.Interfaces;
+    using Ch.Kpi.Containers.Entities.Request;
+    using System;
     using System.Threading.Tasks;
-
-    public class StatsAplication : IStatsAplication
+    public class ContainerAplication : IContainerAplication
     {
         /// <summary>
-        /// The stats domain 
+        /// The IContainerDomain
         /// </summary>
-        private readonly IStatsDomain statsDomain;
+        private readonly IContainerDomain containerDomain;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="StatsAplication"/> class.
-        /// </summary>
-        /// <param name="statsDomain"></param>
-        public StatsAplication(IStatsDomain statsDomain)
+        public ContainerAplication(IContainerDomain containerDomain)
         {
-            this.statsDomain = statsDomain;
+            this.containerDomain = containerDomain;
         }
 
+    
         /// <summary>
-        /// get stadistics 
+        /// The selectContainers
         /// </summary>
-        /// <returns>string</returns>
-        public async Task<string> getStatisticsAsync()
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<string> selectContainersAsync(ContainerRequest request)
         {
-            return await this.statsDomain.getStatisticsAsync().ConfigureAwait(false);
+            return await this.containerDomain.selectContainersAsync(request).ConfigureAwait(false);
         }
     }
 }

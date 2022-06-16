@@ -16,6 +16,11 @@ namespace Ch.Kpi.Containers.DataAccess.Context
     using Ch.Kpi.Containers.Entities.Configuration;
     using Microsoft.Extensions.Configuration;
     using MongoDB.Driver;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class MongoContext : IMongoContext
     {
         /// <summary>
@@ -58,15 +63,15 @@ namespace Ch.Kpi.Containers.DataAccess.Context
         {
             ConfigureMongo();
 
-            using (session = await mongoClient.StartSessionAsync())
+            using (session = await mongoClient.StartSessionAsync().ConfigureAwait(false))
             {
                 session.StartTransaction();
 
                 var commandTasks = commands.Select(c => c());
 
-                await Task.WhenAll(commandTasks);
+                await Task.WhenAll(commandTasks).ConfigureAwait(false);
 
-                await session.CommitTransactionAsync();
+                await session.CommitTransactionAsync().ConfigureAwait(false);
             }
 
             return commands.Count;

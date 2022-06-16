@@ -12,14 +12,12 @@
 
 namespace Ch.Kpi.Containers.DataAccess.Test
 {
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Ch.Kpi.Containers.DataAccess.Context;
     using Ch.Kpi.Containers.DataAccess.Interfaces;
-    using Ch.Kpi.Containers.DataAccess.UnitofWork;
+    using Ch.Kpi.Containers.DataAccess.UoW;
     using Ch.Kpi.Containers.Entities;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// The unit of work tests.
@@ -55,7 +53,7 @@ namespace Ch.Kpi.Containers.DataAccess.Test
         /// Creates the repository should create repository from repository factory when invoked.
         /// </summary>
         [TestMethod]
-        public void CreateRepository_ShouldCreateRepositoryFromRepositoryFactory_WhenInvoked()
+        public void CreateRepositoryShouldCreateRepositoryFromRepositoryFactoryWhenInvoked()
         {
             // Arrange
             var repo = new Mock<IRepository<Container>>();
@@ -76,13 +74,13 @@ namespace Ch.Kpi.Containers.DataAccess.Test
         /// The task.
         /// </returns>
         [TestMethod]
-        public async Task SaveAsync_ShouldSaveUsingDataContext_WhenInvokedAsync()
+        public async Task SaveAsyncShouldSaveUsingDataContextWhenInvokedAsync()
         {
             // Arrange
             this.mockDataContext.Setup(m => m.SaveChanges()).ReturnsAsync(1);
 
             // Act
-            var result = await this.unitOfWork.Commit();
+            var result = await unitOfWork.Commit().ConfigureAwait(false);
 
             // Asert
             Assert.AreEqual(true, result);
@@ -90,7 +88,7 @@ namespace Ch.Kpi.Containers.DataAccess.Test
         }
 
         [TestMethod]
-        public void Dispose_ShouldDisposeDataContext_WhenInvoked()
+        public void DisposeShouldDisposeDataContextWhenInvoked()
         {
             // Arange
             this.mockDataContext.Setup(m => m.Dispose());

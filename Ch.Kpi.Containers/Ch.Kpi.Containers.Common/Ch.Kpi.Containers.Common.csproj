@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -9,6 +9,5 @@
     <AdditionalFiles Include="..\Sln Items\stylecop.json" Link="stylecop.json" />
     <Compile Include="..\Sln Items\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
   </ItemGroup>
-
 
 </Project>

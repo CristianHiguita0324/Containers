@@ -11,9 +11,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 
-namespace Ch.Kpi.Containers.DataAccess.UnitofWork
+namespace Ch.Kpi.Containers.DataAccess.UoW
 {
     using Ch.Kpi.Containers.DataAccess.Interfaces;
+    using System;
     using System.Threading.Tasks;
     public class UnitOfWork : IUnitOfWork
     {
@@ -45,15 +46,34 @@ namespace Ch.Kpi.Containers.DataAccess.UnitofWork
         /// <inheritdoc/>
         public async Task<bool> Commit()
         {
-            var changeAmount = await this.context.SaveChanges();
+            var changeAmount = await context.SaveChanges().ConfigureAwait(false);
 
             return changeAmount > 0;
         }
 
-        /// <inheritdoc/>
+        private bool disposed = false;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
         public void Dispose()
         {
-            this.context.Dispose();
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
+
+        /// <inheritdoc/>
+        //public void Dispose()
+        //{
+        //    this.context.Dispose();
+        //}
     }
 }

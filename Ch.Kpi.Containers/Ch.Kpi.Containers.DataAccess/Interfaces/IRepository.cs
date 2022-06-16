@@ -15,8 +15,10 @@ namespace Ch.Kpi.Containers.DataAccess.Interfaces
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    public interface IRepository<TEntity> : IDisposable where TEntity : class
+    public interface IRepository<TEntity>
+        where TEntity : class
     {
+       
         /// <summary>
         /// Add new entity
         /// </summary>

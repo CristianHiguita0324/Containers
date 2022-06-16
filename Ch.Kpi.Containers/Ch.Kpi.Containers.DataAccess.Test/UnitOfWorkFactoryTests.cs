@@ -13,7 +13,7 @@
 namespace Ch.Kpi.Containers.DataAccess.Test
 {
     using Ch.Kpi.Containers.DataAccess.Interfaces;
-    using Ch.Kpi.Containers.DataAccess.UnitofWork;
+    using Ch.Kpi.Containers.DataAccess.UoW;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
 
@@ -54,7 +54,7 @@ namespace Ch.Kpi.Containers.DataAccess.Test
         /// Gets the unit of work should return unit of work with respository factory when initialized.
         /// </summary>
         [TestMethod]
-        public void GetUnitOfWork_ShouldReturnUnitOfWork_WithRespositoryFactory_WhenInitialized()
+        public void GetUnitOfWorkShouldReturnUnitOfWorkWithRespositoryFactoryWhenInitialized()
         {
             // Act
             using (var unitOfWork = this.factory.GetUnitOfWork())

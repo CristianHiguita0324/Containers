@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Container.cs" company="CristianHiguita">
+// <copyright file="ContainerRequest.cs" company="CristianHiguita">
 //    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
@@ -9,31 +9,26 @@
 //    OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Ch.Kpi.Containers.Entities
+namespace Ch.Kpi.Containers.Entities.Request
 {
-    public class Container
+    public class ContainerRequest
     {
         /// <summary>
-        /// The container name
+        /// Gets or sets the Budget.
         /// </summary>
-        [Required(ErrorMessage = constants.ContainerNameRequired)]
-        public string Name { get; set; }
+        [Required(ErrorMessage = constants.BudgetRequired)]
+        public double Budget { get; set; }
 
         /// <summary>
-        /// The transport cost
-        /// </summary>
-        
-        [Required(ErrorMessage = constants.TransportCostRequired)]
-        public double TransportCost { get; set; }
-
-        /// <summary>
-        /// The container price
+        /// Gets or sets the Containers.
         /// </summary>
         /// 
-        [Required(ErrorMessage = constants.ContainerPriceRequired)]
-        public double ContainerPrice { get; set; }
+        [Required(ErrorMessage = constants.ContainerListRequired)]
+        public List<Container> Containers { get; set; }    
 
     }
 }

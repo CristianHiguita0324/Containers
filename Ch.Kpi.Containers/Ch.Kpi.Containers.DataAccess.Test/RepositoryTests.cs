@@ -64,7 +64,7 @@ namespace Ch.Kpi.Containers.DataAccess.Test
         /// Inserts the should insert using data access.
         /// </summary>
         [TestMethod]
-        public void Insert_ShouldAddUsingDataAccess()
+        public void InsertShouldAddUsingDataAccess()
         {
             // Arrange
             var container = new Container();
@@ -77,7 +77,7 @@ namespace Ch.Kpi.Containers.DataAccess.Test
         /// Updates the should update using data access.
         /// </summary>
         [TestMethod]
-        public void Remove_ShouldRemoveUsingDataAccess()
+        public void RemoveShouldRemoveUsingDataAccess()
         {
             // Arrange
             var id = new Guid();
@@ -96,7 +96,7 @@ namespace Ch.Kpi.Containers.DataAccess.Test
         /// The task.
         /// </returns>
         [TestMethod]
-        public async Task GetByIdAsync_ShouldGetEntityFromDataAccessAsync()
+        public async Task GetByIdAsyncShouldGetEntityFromDataAccessAsync()
         {
             // Arrange
             var id = new Guid();
@@ -117,7 +117,7 @@ namespace Ch.Kpi.Containers.DataAccess.Test
         /// The task.
         /// </returns>
         [TestMethod]
-        public async Task GetAllAsync_ShouldReturnAllContainersFromDataAccessAsync()
+        public async Task GetAllAsyncShouldReturnAllContainersFromDataAccessAsync()
         {
             // Arrange
             var categories = new[] { new Container() };

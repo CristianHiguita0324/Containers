@@ -14,12 +14,16 @@ namespace Ch.Kpi.Containers.DataAccess.Repositories
 {
     using Ch.Kpi.Containers.DataAccess.Interfaces;
     using MongoDB.Driver;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         /// <summary>
         /// The mongo context
         /// </summary>
-        protected readonly IMongoContext Context;
+        private readonly IMongoContext Context;
 
         /// <summary>
         /// The dbSet
@@ -32,49 +36,35 @@ namespace Ch.Kpi.Containers.DataAccess.Repositories
         /// <param name="context">The context.</param>
         public Repository(IMongoContext context)
         {
-            Context = context;
+            this.Context = context;
 
-            DbSet = Context.GetCollection<TEntity>(typeof(TEntity).Name);
+            DbSet = this.Context.GetCollection<TEntity>(typeof(TEntity).Name);
         }
 
         /// <inheritdoc/>
         public virtual void Add(TEntity obj)
         {
-            Context.AddCommand(() => DbSet.InsertOneAsync(obj));
+            this.Context.AddCommand(() => DbSet.InsertOneAsync(obj));
         }
 
         /// <inheritdoc/>
         public virtual async Task<TEntity> GetById(Guid id)
         {
-            var data = await DbSet.FindAsync(Builders<TEntity>.Filter.Eq("_id", id));
+            var data = await DbSet.FindAsync(Builders<TEntity>.Filter.Eq("_id", id)).ConfigureAwait(false);
             return data.SingleOrDefault();
         }
 
         /// <inheritdoc/>
         public virtual async Task<IEnumerable<TEntity>> GetAll()
         {
-            try
-            {
-                var all = await DbSet.FindAsync(Builders<TEntity>.Filter.Empty);
-                return all.ToList();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-          
+            var all = await DbSet.FindAsync(Builders<TEntity>.Filter.Empty).ConfigureAwait(false);
+            return all.ToList();
         }
 
         /// <inheritdoc/>
         public virtual void Remove(Guid id)
         {
-            Context.AddCommand(() => DbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq("_id", id)));
-        }
-
-        /// <inheritdoc/>
-        public void Dispose()
-        {
-            Context?.Dispose();
+            this.Context.AddCommand(() => DbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq("_id", id)));
         }
     }
 }

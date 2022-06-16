@@ -2,9 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <CodeAnalysisRuleSet>..\Sln Items\Ch.Kpi.Containers.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\Sln Items\stylecop.json" Link="stylecop.json" />
+    <Compile Include="..\Sln Items\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Ch.Kpi.Containers.Domain\Ch.Kpi.Containers.Domain.csproj" />

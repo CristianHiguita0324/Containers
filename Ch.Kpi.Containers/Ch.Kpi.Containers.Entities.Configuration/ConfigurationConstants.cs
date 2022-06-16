@@ -14,6 +14,7 @@
 namespace Ch.Kpi.Containers.Entities.Configuration
 {
     using System.Diagnostics.CodeAnalysis;
+
     /// <summary>
     /// The configuration constants.
     /// </summary>

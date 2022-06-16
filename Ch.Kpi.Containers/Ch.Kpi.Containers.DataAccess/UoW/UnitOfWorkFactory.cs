@@ -10,7 +10,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Ch.Kpi.Containers.DataAccess.UnitofWork
+namespace Ch.Kpi.Containers.DataAccess.UoW
 {
     using Ch.Kpi.Containers.DataAccess.Interfaces;
 

@@ -14,9 +14,6 @@ namespace Ch.Kpi.Containers.DataAccess.Persistence
         {
             ContainerMap.Configure();
 
-            BsonDefaults.GuidRepresentation = GuidRepresentation.CSharpLegacy;
-            //BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.CSharpLegacy));
-
             // Conventions
             var pack = new ConventionPack
                 {

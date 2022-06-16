@@ -4,9 +4,12 @@ using Ch.Kpi.Containers.DataAccess.Context;
 using Ch.Kpi.Containers.DataAccess.Interfaces;
 using Ch.Kpi.Containers.DataAccess.Persistence;
 using Ch.Kpi.Containers.DataAccess.Repositories;
-using Ch.Kpi.Containers.DataAccess.UnitofWork;
+using Ch.Kpi.Containers.DataAccess.UoW;
 using Ch.Kpi.Containers.Domain.Interfaces;
 using Ch.Kpi.Containers.Domain.Services;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +24,10 @@ builder.Services.AddTransient<IUnitOfWorkFactory, UnitOfWorkFactory>();
 builder.Services.AddTransient<IRepositoryFactory, RepositoryFactory>();
 builder.Services.AddTransient<IStatsAplication, StatsAplication>();
 builder.Services.AddTransient<IStatsDomain, StatsDomain>();
+builder.Services.AddTransient<IContainerAplication, ContainerAplication>();
+builder.Services.AddTransient<IContainerDomain, ContainerDomain>();
+
+
 
 
 
