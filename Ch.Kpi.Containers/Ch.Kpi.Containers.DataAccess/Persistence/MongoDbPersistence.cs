@@ -1,12 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MongoDbPersistence.cs" company="CristianHiguita">
-//    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-//    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-//    OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-//    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-//    OTHER DEALINGS IN THE SOFTWARE.
+// The following code applies to the technical test proposed by MercadoLibre
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -17,7 +11,7 @@ namespace Ch.Kpi.Containers.DataAccess.Persistence
     {
         public static void Configure()
         {
-            ContainerMap.Configure();
+            StatsMap.Configure();
 
             // Conventions
             var pack = new ConventionPack
@@ -25,7 +19,7 @@ namespace Ch.Kpi.Containers.DataAccess.Persistence
                     new IgnoreExtraElementsConvention(true),
                     new IgnoreIfDefaultConvention(true)
                 };
-            ConventionRegistry.Register("My Solution Conventions", pack, t => true);
+            ConventionRegistry.Register("Technical test Cristian Higuita", pack, t => true);
         }
     }
 }

@@ -1,12 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="RepositoryTests.cs" company="CristianHiguita">
-//    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-//    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-//    OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-//    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-//    OTHER DEALINGS IN THE SOFTWARE.
+// The following code applies to the technical test proposed by MercadoLibre
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -19,7 +13,6 @@ namespace Ch.Kpi.Containers.DataAccess.Test
     using MongoDB.Driver;
     using Moq;
     using System;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// The repository tests.
@@ -85,49 +78,6 @@ namespace Ch.Kpi.Containers.DataAccess.Test
 
             // Act
             this.repository.Remove(id);
-
         }
-
-
-        /// <summary>
-        /// Gets the by identifier asynchronous should get entity from data access.
-        /// </summary>
-        /// <returns>
-        /// The task.
-        /// </returns>
-        //[TestMethod]
-        //public async Task GetByIdAsyncShouldGetEntityFromDataAccessAsync()
-        //{
-        //    // Arrange
-        //    var id = new Guid();
-        //    var container = new Container();
-        //    this.mockrepository.Setup(m => m.GetById(id)).ReturnsAsync(container);
-
-        //    // Act
-        //    var result = await this.repository.GetById(id).ConfigureAwait(false);
-
-        //    // Assert
-        //    Assert.AreEqual(result, container);
-        //}
-
-        /// <summary>
-        /// Gets the by identifier asynchronous should get entity from data access.
-        /// </summary>
-        /// <returns>
-        /// The task.
-        /// </returns>
-        //[TestMethod]
-        //public async Task GetAllAsyncShouldReturnAllContainersFromDataAccessAsync()
-        //{
-        //    // Arrange
-        //    var categories = new[] { new Container() };
-        //    this.mockrepository.Setup(m => m.GetAll()).ReturnsAsync(categories);
-
-        //    // Act
-        //    var result = await this.repository.GetAll().ConfigureAwait(false);
-
-        //    // Assert
-        //    Assert.AreEqual(categories, result);
-        //}
     }
 }

@@ -1,12 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ContainersController.cs" company="CristianHiguita">
-//    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-//    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-//    OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-//    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-//    OTHER DEALINGS IN THE SOFTWARE.
+// The following code applies to the technical test proposed by MercadoLibre
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -29,13 +23,17 @@ namespace Ch.Kpi.Containers.Api.Controllers
         /// </summary>
         private readonly IContainerAplication containerAplication;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ContainersController"/> class.
+        /// </summary>
+        /// <param name="containerAplication"></param>
         public ContainersController(IContainerAplication containerAplication)
         {
             this.containerAplication = containerAplication;
         }
 
         /// <summary>
-        /// selectContainers
+        /// resource to select the containers that are going to be dispatched
         /// </summary>
         /// <param name="Request"></param>
         /// <returns></returns>

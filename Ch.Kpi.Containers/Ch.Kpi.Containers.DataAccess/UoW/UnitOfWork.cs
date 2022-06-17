@@ -1,12 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="UnitOfWork.cs" company="CristianHiguita">
-//    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-//    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-//    OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-//    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-//    OTHER DEALINGS IN THE SOFTWARE.
+// The following code applies to the technical test proposed by MercadoLibre
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -18,6 +12,9 @@ namespace Ch.Kpi.Containers.DataAccess.UoW
     using System.Threading.Tasks;
     public class UnitOfWork : IUnitOfWork
     {
+        /// <summary>
+        /// The Mongo data base context
+        /// </summary>
         private readonly IMongoContext context;
 
         /// <summary>
@@ -52,6 +49,8 @@ namespace Ch.Kpi.Containers.DataAccess.UoW
         }
 
         private bool disposed = false;
+
+        /// <inheritdoc/>
         protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
@@ -64,16 +63,11 @@ namespace Ch.Kpi.Containers.DataAccess.UoW
             this.disposed = true;
         }
 
+        /// <inheritdoc/>
         public void Dispose()
         {
             this.Dispose(true);
             GC.SuppressFinalize(this);
         }
-
-        /// <inheritdoc/>
-        //public void Dispose()
-        //{
-        //    this.context.Dispose();
-        //}
     }
 }
