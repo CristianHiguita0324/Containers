@@ -95,20 +95,20 @@ namespace Ch.Kpi.Containers.DataAccess.Test
         /// <returns>
         /// The task.
         /// </returns>
-        [TestMethod]
-        public async Task GetByIdAsyncShouldGetEntityFromDataAccessAsync()
-        {
-            // Arrange
-            var id = new Guid();
-            var container = new Container();
-            this.mockrepository.Setup(m => m.GetById(id)).ReturnsAsync(container);
+        //[TestMethod]
+        //public async Task GetByIdAsyncShouldGetEntityFromDataAccessAsync()
+        //{
+        //    // Arrange
+        //    var id = new Guid();
+        //    var container = new Container();
+        //    this.mockrepository.Setup(m => m.GetById(id)).ReturnsAsync(container);
 
-            // Act
-            var result = await this.repository.GetById(id).ConfigureAwait(false);
+        //    // Act
+        //    var result = await this.repository.GetById(id).ConfigureAwait(false);
 
-            // Assert
-            Assert.AreEqual(result, container);
-        }
+        //    // Assert
+        //    Assert.AreEqual(result, container);
+        //}
 
         /// <summary>
         /// Gets the by identifier asynchronous should get entity from data access.
@@ -116,18 +116,18 @@ namespace Ch.Kpi.Containers.DataAccess.Test
         /// <returns>
         /// The task.
         /// </returns>
-        [TestMethod]
-        public async Task GetAllAsyncShouldReturnAllContainersFromDataAccessAsync()
-        {
-            // Arrange
-            var categories = new[] { new Container() };
-            this.mockrepository.Setup(m => m.GetAll()).ReturnsAsync(categories);
+        //[TestMethod]
+        //public async Task GetAllAsyncShouldReturnAllContainersFromDataAccessAsync()
+        //{
+        //    // Arrange
+        //    var categories = new[] { new Container() };
+        //    this.mockrepository.Setup(m => m.GetAll()).ReturnsAsync(categories);
 
-            // Act
-            var result = await this.repository.GetAll().ConfigureAwait(false);
+        //    // Act
+        //    var result = await this.repository.GetAll().ConfigureAwait(false);
 
-            // Assert
-            Assert.AreEqual(categories, result);
-        }
+        //    // Assert
+        //    Assert.AreEqual(categories, result);
+        //}
     }
 }
