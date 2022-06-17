@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IStatsDomain.cs" company="CristianHiguita">
+// <copyright file="MongoDbPersistenceTest.cs" company="CristianHiguita">
 //    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
@@ -10,15 +10,33 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Ch.Kpi.Containers.Domain.Interfaces
+using Ch.Kpi.Containers.DataAccess.Persistence;
+
+namespace Ch.Kpi.Containers.DataAccess.Test
 {
-    using System.Threading.Tasks;
-    public interface IStatsDomain
+    /// <summary>
+    /// The MongoDbPersistence tests.
+    /// </summary>
+    [TestClass]
+    public class MongoDbPersistenceTest
     {
         /// <summary>
-        /// get the statistics
+        /// Initializes this instance.
         /// </summary>
-        /// <returns></returns>
-        Task<string> GetStatisticsAsync();
+        [TestInitialize]
+        public void Initialize()
+        {
+
+        }
+
+        /// <summary>
+        /// Creates the repository should create repository with data access.
+        /// </summary>
+        [TestMethod]
+        public void CreateRepositoryShouldCreateRepositoryWithDataAccess()
+        {
+            // Act
+            MongoDbPersistence.Configure();
+        }
     }
 }

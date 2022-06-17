@@ -20,6 +20,6 @@ namespace Ch.Kpi.Containers.Aplication.Interfaces
         /// get the statistics
         /// </summary>
         /// <returns></returns>
-        Task<string> selectContainersAsync(ContainerRequest request); 
+        Task<string> SelectContainersAsync(ContainerRequest request); 
     }
 }

@@ -14,6 +14,7 @@ namespace Ch.Kpi.Containers.Api.Controllers
 {
     using Ch.Kpi.Containers.Aplication.Interfaces;
     using Ch.Kpi.Containers.Common.Exeptions;
+    using Ch.Kpi.Containers.Entities.Entities;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using System;
@@ -41,27 +42,23 @@ namespace Ch.Kpi.Containers.Api.Controllers
         /// get the cumulative value of shipped and unshipped containers
         /// </summary>
         /// <returns></returns>
-        [HttpGet("stats")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(404)]
+        [HttpGet("Stats")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Stats))]
         [ProducesResponseType(500)]
-        [ProducesResponseType(504)]
-        public async Task<string> StatsAsync()
+        [ProducesResponseType(409)]
+        public async Task<IActionResult> StatsAsync()
         {
             try
             {
-                return await statsAplication.getStatisticsAsync().ConfigureAwait(false);
+                return StatusCode((int)StatusCodes.Status200OK, await statsAplication.GetStatisticsAsync().ConfigureAwait(false));
             }
             catch (TechnicalException ex)
             {
-                return  StatusCode(StatusCodes.Status409Conflict, ex.Message.ToString()).ToString();
+                return StatusCode((int)StatusCodes.Status409Conflict, ex.Message.ToString());
             }
-
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex).ToString();
+                return StatusCode((int)StatusCodes.Status500InternalServerError, ex);
             }
         }
     }

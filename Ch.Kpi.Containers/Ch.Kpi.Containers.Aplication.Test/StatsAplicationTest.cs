@@ -12,13 +12,9 @@
 
 namespace Ch.Kpi.Containers.Aplication.Test
 {
-    using Ch.Kpi.Containers.Common.Exeptions;
-    using Ch.Kpi.Containers.DataAccess.Interfaces;
+    using Ch.Kpi.Containers.Aplication.Services;
     using Ch.Kpi.Containers.Domain.Interfaces;
-    using Ch.Kpi.Containers.Domain.Services;
-    using Ch.Kpi.Containers.Entities.Entities;
     using Moq;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -33,24 +29,9 @@ namespace Ch.Kpi.Containers.Aplication.Test
         private Mock<IStatsDomain> MockStatsDomain;
 
         /// <summary>
-        /// The mock unitOfWork.
+        /// The StatsAplication
         /// </summary>
-        private readonly Mock<IUnitOfWork> unitOfWorkMock = new Mock<IUnitOfWork>();
-
-        /// <summary>
-        /// The mock unitOfWorkFactory.
-        /// </summary>
-        private readonly Mock<IUnitOfWorkFactory> unitOfWorkFactory = new Mock<IUnitOfWorkFactory>();
-
-        /// <summary>
-        /// the mockDomainRepository
-        /// </summary>
-        private  Mock<IRepository<Stats>> mockStatsRepository;
-
-        /// <summary>
-        /// The StatsDomain
-        /// </summary>
-        private StatsDomain statsDomain;
+        private StatsAplication statsAplication;
 
         /// <summary>
         /// Initializes this instance.
@@ -58,10 +39,8 @@ namespace Ch.Kpi.Containers.Aplication.Test
         [TestInitialize]
         public void Initialize()
         {
-            this.mockStatsRepository = new Mock<IRepository<Stats>>();
-            this.unitOfWorkFactory.Setup(a => a.GetUnitOfWork()).Returns(this.unitOfWorkMock.Object);
             this.MockStatsDomain = new Mock<IStatsDomain>();
-            this.statsDomain = new StatsDomain(unitOfWorkFactory.Object);
+            this.statsAplication = new StatsAplication(MockStatsDomain.Object);
         }
 
         /// <summary>
@@ -71,39 +50,12 @@ namespace Ch.Kpi.Containers.Aplication.Test
         public async Task ShouldInvokegetStatisticsAsync()
         {
             // Arrange
-            var list = setListStats();
-            this.unitOfWorkMock.Setup(a => a.CreateRepository<Stats>()).Returns(this.mockStatsRepository.Object);
-            this.mockStatsRepository.Setup(a => a.GetAll()).ReturnsAsync(list);
-            this.MockStatsDomain.Setup(m => m.getStatisticsAsync()).ReturnsAsync("");
+            this.MockStatsDomain.Setup(m => m.GetStatisticsAsync()).ReturnsAsync("");
             // Act
             // Execute
-            var response = await this.statsDomain.getStatisticsAsync().ConfigureAwait(false);
+            var response = await this.statsAplication.GetStatisticsAsync().ConfigureAwait(false);
             // Assert
             Assert.IsNotNull(response);
-        }
-
-        /// <summary>
-        /// ShouldInvokegetStatisticsAsyncExceptio.
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(TechnicalException))]
-        public async Task ShouldInvokegetStatisticsAsyncExceptio()
-        {
-            // Arrange
-            var list = new List<Stats>() { new Stats() { BudgetUsed = 10.0, ContainersDispatched = 20.2,ContainersNotDispatched = 20.3} };
-            this.unitOfWorkMock.Setup(a => a.CreateRepository<Stats>()).Returns(this.mockStatsRepository.Object);
-            this.mockStatsRepository.Setup(a => a.GetAll()).ThrowsAsync(new TechnicalException());
-            this.MockStatsDomain.Setup(m => m.getStatisticsAsync()).ReturnsAsync("");
-            // Act
-            // Execute
-            var response = await this.statsDomain.getStatisticsAsync().ConfigureAwait(false);
-            // Assert
-            Assert.IsNotNull(response);
-        }
-
-        private List<Stats> setListStats()
-        {
-            return new List<Stats>() { new Stats() { BudgetUsed = 10.0, ContainersDispatched = 20.2, ContainersNotDispatched = 20.3 } };
         }
     }
 }

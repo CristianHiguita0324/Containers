@@ -36,9 +36,9 @@ namespace Ch.Kpi.Containers.Aplication.Services
         /// get stadistics 
         /// </summary>
         /// <returns>string</returns>
-        public async Task<string> getStatisticsAsync()
+        public async Task<string> GetStatisticsAsync()
         {
-            return await this.statsDomain.getStatisticsAsync().ConfigureAwait(false);
+            return await this.statsDomain.GetStatisticsAsync().ConfigureAwait(false);
         }
     }
 }

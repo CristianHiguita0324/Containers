@@ -51,12 +51,12 @@ namespace Ch.Kpi.Containers.Api.Test
         {
             // Prepare
             this.mockStatsAplication
-                .Setup(p => p.getStatisticsAsync()).Returns(Task.FromResult("Result"));
+                .Setup(p => p.GetStatisticsAsync()).Returns(Task.FromResult("Result"));
 
             // Execute
             await this.statsController.StatsAsync().ConfigureAwait(false);
             // Assert
-            this.mockStatsAplication.Verify(m => m.getStatisticsAsync(), Times.Once);
+            this.mockStatsAplication.Verify(m => m.GetStatisticsAsync(), Times.Once);
         }
 
         /// <summary>
@@ -68,12 +68,12 @@ namespace Ch.Kpi.Containers.Api.Test
         {
             // Prepare
             this.mockStatsAplication
-                .Setup(p => p.getStatisticsAsync()).ThrowsAsync(new TechnicalException());
+                .Setup(p => p.GetStatisticsAsync()).ThrowsAsync(new TechnicalException());
 
             // Execute
             await this.statsController.StatsAsync().ConfigureAwait(false);
             // Assert
-            this.mockStatsAplication.Verify(m => m.getStatisticsAsync(), Times.Once);
+            this.mockStatsAplication.Verify(m => m.GetStatisticsAsync(), Times.Once);
         }
 
         /// <summary>
@@ -85,12 +85,12 @@ namespace Ch.Kpi.Containers.Api.Test
         {
             // Prepare
             this.mockStatsAplication
-                .Setup(p => p.getStatisticsAsync()).ThrowsAsync(new Exception());
+                .Setup(p => p.GetStatisticsAsync()).ThrowsAsync(new Exception());
 
             // Execute
             await this.statsController.StatsAsync().ConfigureAwait(false);
             // Assert
-            this.mockStatsAplication.Verify(m => m.getStatisticsAsync(), Times.Once);
+            this.mockStatsAplication.Verify(m => m.GetStatisticsAsync(), Times.Once);
         }
     }
 }

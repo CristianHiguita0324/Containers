@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IStatsDomain.cs" company="CristianHiguita">
+// <copyright file="Constans.cs" company="CristianHiguita">
 //    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
@@ -10,15 +10,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Ch.Kpi.Containers.Domain.Interfaces
+namespace Ch.Kpi.Containers.Entities
 {
-    using System.Threading.Tasks;
-    public interface IStatsDomain
+    public static class ConstantsTest
     {
         /// <summary>
-        /// get the statistics
+        /// Gets the Create.
         /// </summary>
-        /// <returns></returns>
-        Task<string> GetStatisticsAsync();
+        public const string selectContainersResponse = "Los contenedores que deben ser enviados son :  - C1 - C2 - C4";
     }
 }

@@ -39,26 +39,23 @@ namespace Ch.Kpi.Containers.Api.Controllers
         /// </summary>
         /// <param name="Request"></param>
         /// <returns></returns>
-        [HttpGet("selectContainers")]
+        [HttpGet("SelectContainers")]
         [ProducesResponseType(200)]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        [ProducesResponseType(504)]
-        public async Task<string> selectContainersAsync([FromBody] ContainerRequest request)
+        [ProducesResponseType(409)]
+        public async Task<IActionResult> SelectContainersAsync([FromBody] ContainerRequest request)
         {
             try
             {
-                return await this.containerAplication.selectContainersAsync(request).ConfigureAwait(false);
+                return StatusCode((int)StatusCodes.Status200OK, await this.containerAplication.SelectContainersAsync(request).ConfigureAwait(false));
             }
             catch (TechnicalException ex)
             {
-                return StatusCode(StatusCodes.Status409Conflict, ex.Message.ToString()).ToString();
+                return StatusCode((int)StatusCodes.Status409Conflict, ex.Message.ToString());
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex).ToString();
+                return StatusCode((int)StatusCodes.Status500InternalServerError, ex);
             }
         }
     }

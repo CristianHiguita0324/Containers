@@ -21,6 +21,6 @@ namespace Ch.Kpi.Containers.Domain.Interfaces
         /// get the statistics
         /// </summary>
         /// <returns></returns>
-        Task<string> selectContainersAsync(ContainerRequest request);
+        Task<string> SelectContainersAsync(ContainerRequest request);
     }
 }

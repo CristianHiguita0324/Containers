@@ -49,7 +49,7 @@ namespace Ch.Kpi.Containers.Api.Test
         {
             // Prepare
             this.mockContainerAplication
-                .Setup(p => p.selectContainersAsync(
+                .Setup(p => p.SelectContainersAsync(
                     It.IsAny<ContainerRequest>()))
                 .Returns(Task.FromResult("Result"));
 
@@ -57,7 +57,7 @@ namespace Ch.Kpi.Containers.Api.Test
             ContainerRequest request = new ContainerRequest();
             await this.containersController.selectContainersAsync(request).ConfigureAwait(false);
             // Assert
-            this.mockContainerAplication.Verify(m => m.selectContainersAsync(request), Times.Once);
+            this.mockContainerAplication.Verify(m => m.SelectContainersAsync(request), Times.Once);
         }
 
         /// <summary>
@@ -68,14 +68,14 @@ namespace Ch.Kpi.Containers.Api.Test
         public async Task ShouldInvokeContainerAplicationTechnicalExceptionAsync()
         {
             // Prepare
-            this.mockContainerAplication.Setup(p => p.selectContainersAsync(It.IsAny<ContainerRequest>())).ThrowsAsync(new TechnicalException());
+            this.mockContainerAplication.Setup(p => p.SelectContainersAsync(It.IsAny<ContainerRequest>())).ThrowsAsync(new TechnicalException());
 
             // Execute
             ContainerRequest request = new ContainerRequest();
             await this.containersController.selectContainersAsync(request).ConfigureAwait(false);
 
             // Assert
-            this.mockContainerAplication.Verify(m => m.selectContainersAsync(request), Times.Once);
+            this.mockContainerAplication.Verify(m => m.SelectContainersAsync(request), Times.Once);
         }
 
         /// <summary>
@@ -86,14 +86,14 @@ namespace Ch.Kpi.Containers.Api.Test
         public async Task ShouldInvokeContainerAplicationExceptionAsync()
         {
             // Prepare
-            this.mockContainerAplication.Setup(p => p.selectContainersAsync(It.IsAny<ContainerRequest>())).ThrowsAsync(new Exception());
+            this.mockContainerAplication.Setup(p => p.SelectContainersAsync(It.IsAny<ContainerRequest>())).ThrowsAsync(new Exception());
 
             // Execute
             ContainerRequest request = new ContainerRequest();
             await this.containersController.selectContainersAsync(request).ConfigureAwait(false);
 
             // Assert
-            this.mockContainerAplication.Verify(m => m.selectContainersAsync(request), Times.Once);
+            this.mockContainerAplication.Verify(m => m.SelectContainersAsync(request), Times.Once);
         }
     }
 }

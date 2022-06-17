@@ -25,5 +25,6 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1051:Do not declare visible instance fields", Justification = "<Pending>", Scope = "member", Target = "~F:Ch.Kpi.Containers.DataAccess.Repositories.Repository`1.DbSet")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1063:Implement IDisposable Correctly", Justification = "<Pending>", Scope = "member", Target = "~M:Ch.Kpi.Containers.DataAccess.UoW.UnitOfWork.Dispose")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "<Pending>", Scope = "type", Target = "~T:Ch.Kpi.Containers.DataAccess.Test.UnitOfWorkTests")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "<Pending>", Scope = "type", Target = "~T:Ch.Kpi.Containers.Api.Test.StatsControllerTest")]
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "<Pending>", Scope = "type", Target = "~T:Ch.Kpi.Containers.Api.Test.ContainersControllerTest")]

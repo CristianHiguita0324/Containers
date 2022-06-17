@@ -12,11 +12,9 @@
 
 namespace Ch.Kpi.Containers.Aplication.Test
 {
-    using Ch.Kpi.Containers.Common.Exeptions;
-    using Ch.Kpi.Containers.DataAccess.Interfaces;
+    using Ch.Kpi.Containers.Aplication.Services;
     using Ch.Kpi.Containers.Domain.Interfaces;
-    using Ch.Kpi.Containers.Domain.Services;
-    using Ch.Kpi.Containers.Entities.Entities;
+    using Ch.Kpi.Containers.Entities;
     using Ch.Kpi.Containers.Entities.Request;
     using Moq;
     using System.Collections.Generic;
@@ -31,27 +29,13 @@ namespace Ch.Kpi.Containers.Aplication.Test
         /// <summary>
         /// The MockStatsDomain
         /// </summary>
-        private Mock<IContainerDomain> MockContainerDomain;
+        private Mock<IContainerDomain> mockContainerDomain;
+
 
         /// <summary>
-        /// The mock unitOfWork.
+        /// The ContainerAplication
         /// </summary>
-        private readonly Mock<IUnitOfWork> unitOfWorkMock = new Mock<IUnitOfWork>();
-
-        /// <summary>
-        /// The mock unitOfWorkFactory.
-        /// </summary>
-        private readonly Mock<IUnitOfWorkFactory> unitOfWorkFactory = new Mock<IUnitOfWorkFactory>();
-
-        /// <summary>
-        /// the mockStatsRepository
-        /// </summary>
-        private Mock<IRepository<Stats>> mockStatsRepository;
-
-        /// <summary>
-        /// The ContainerDomain
-        /// </summary>
-        private ContainerDomain containerDomain;
+        private ContainerAplication containerAplication;
 
         /// <summary>
         /// Initializes this instance.
@@ -59,10 +43,8 @@ namespace Ch.Kpi.Containers.Aplication.Test
         [TestInitialize]
         public void Initialize()
         {
-            this.mockStatsRepository = new Mock<IRepository<Stats>>();
-            this.unitOfWorkFactory.Setup(a => a.GetUnitOfWork()).Returns(this.unitOfWorkMock.Object);
-            this.MockContainerDomain = new Mock<IContainerDomain>();
-            this.containerDomain = new ContainerDomain(unitOfWorkFactory.Object);
+            this.mockContainerDomain = new Mock<IContainerDomain>();
+            this.containerAplication = new ContainerAplication(mockContainerDomain.Object);
         }
 
         /// <summary>
@@ -72,21 +54,20 @@ namespace Ch.Kpi.Containers.Aplication.Test
         public async Task ShouldInvokeselectContainersAsync()
         {
             // Arrange
-            var request = setRequest(); 
-            this.unitOfWorkMock.Setup(a => a.CreateRepository<Stats>()).Returns(this.mockStatsRepository.Object);
-            this.MockContainerDomain.Setup(m => m.selectContainersAsync(It.IsAny<ContainerRequest>())).ReturnsAsync("");
+            var request = SetRequest(); 
+            this.mockContainerDomain.Setup(m => m.SelectContainersAsync(It.IsAny<ContainerRequest>())).ReturnsAsync(ConstantsTest.selectContainersResponse);
             // Act
             // Execute
-            var response = await this.containerDomain.selectContainersAsync(request).ConfigureAwait(false);
+            var response = await this.containerAplication.SelectContainersAsync(request).ConfigureAwait(false);
             // Assert
-            Assert.AreEqual("Los contenedores que deben ser enviados son :  - C1 - C2 - C4", response);
+            Assert.AreEqual(ConstantsTest.selectContainersResponse, response);
         }
 
         /// <summary>
         /// create container entity
         /// </summary>
         /// <returns>ContainerRequest</returns>
-        private ContainerRequest setRequest()
+        private ContainerRequest SetRequest()
         {
             return new ContainerRequest()
             {

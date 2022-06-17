@@ -12,12 +12,12 @@
 
 namespace Ch.Kpi.Containers.Domain.Services
 {
+    using Ch.Kpi.Containers.Common;
     using Ch.Kpi.Containers.Common.Exeptions;
     using Ch.Kpi.Containers.DataAccess.Interfaces;
     using Ch.Kpi.Containers.Domain.Interfaces;
     using Ch.Kpi.Containers.Entities;
     using Ch.Kpi.Containers.Entities.Entities;
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -39,20 +39,17 @@ namespace Ch.Kpi.Containers.Domain.Services
         }
 
         /// <summary>
-        /// the get statistics
+        /// obtains the accumulated value of the shipped and unshipped containers
         /// </summary>
         /// <returns>the Statistics</returns>
         /// <exception cref="TechnicalException"></exception>
-        public async Task<string> getStatisticsAsync()
+        public async Task<string> GetStatisticsAsync()
         {
             try
             {
-                var statsRepository = this.unitOfWork.CreateRepository<Stats>();
-                var listStats = await statsRepository.GetAll().ConfigureAwait(false);
+                var listStats = await GetStatsAsync().ConfigureAwait(false);
 
-                return listStats.Any() ? 
-                    JsonConvert.SerializeObject(setResponseStats(listStats.ToList())):
-                    constants.NoDataStatsError;
+                return this.SerializeResponse(listStats);
             }
             catch (Exception ex)
             {
@@ -61,11 +58,33 @@ namespace Ch.Kpi.Containers.Domain.Services
         }
 
         /// <summary>
+        /// deserializes the entity and returns it in string
+        /// </summary>
+        /// <param name="listStats"></param>
+        /// <returns></returns>
+        private string SerializeResponse(IEnumerable<Stats> listStats)
+        {
+            return listStats.Any() ?
+                   Extensions.SerializeObject((object)SetResponseStats(listStats)) :
+                   constants.NoDataStatsError;
+        }
+
+        /// <summary>
+        /// get all the records of the statistics table
+        /// </summary>
+        /// <returns>List Stats</returns>
+        private async Task<IEnumerable<Stats>> GetStatsAsync()
+        {
+            var statsRepository = this.unitOfWork.CreateRepository<Stats>();
+            return await statsRepository.GetAll().ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// The set Response Stats
         /// </summary>
         /// <param name="listStats"></param>
         /// <returns></returns>
-        private Stats setResponseStats(List<Stats> listStats)
+        private Stats SetResponseStats(IEnumerable<Stats> listStats)
         {
             return new Stats()
             {

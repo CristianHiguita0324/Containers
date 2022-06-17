@@ -19,6 +19,7 @@ namespace Ch.Kpi.Containers.Domain.Services
     using Ch.Kpi.Containers.Entities.Entities;
     using Ch.Kpi.Containers.Entities.Request;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -30,6 +31,10 @@ namespace Ch.Kpi.Containers.Domain.Services
         /// </summary>
         private readonly IUnitOfWork unitOfWork;
 
+        private double sumContainerPrice;
+
+        private  string response;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="StatsDomain"/> class.
         /// </summary>
@@ -37,6 +42,8 @@ namespace Ch.Kpi.Containers.Domain.Services
         public ContainerDomain(IUnitOfWorkFactory unitOfWorkFactoy)
         {
             this.unitOfWork = unitOfWorkFactoy.GetUnitOfWork();
+            this.sumContainerPrice = 0;
+            this.response = string.Empty;
         }
 
         /// <summary>
@@ -44,35 +51,49 @@ namespace Ch.Kpi.Containers.Domain.Services
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<string> selectContainersAsync(ContainerRequest request)
+        public async Task<string> SelectContainersAsync(ContainerRequest request)
         {
             var list = request.Containers.OrderByDescending(x => x.ContainerPrice).ThenBy(x => x.TransportCost).ToList();
+            
+            (this.response, this.sumContainerPrice) = GetContainersToShip(list, request.Budget);
 
+            await SaveStatsAsync(CreateStatsEntity(request , this.sumContainerPrice)).ConfigureAwait(false);
+            return this.response;
+        }
+
+        /// <summary>
+        /// get the best choice of containers to ship
+        /// </summary>
+        /// <param name="containerList"></param>
+        /// <param name="budget"></param>
+        /// <returns></returns>
+        private (string,double) GetContainersToShip(List<Container> containerList, double budget)
+        {
             double sumTransportCost = 0, sumContainerPrice = 0;
             var response = new StringBuilder();
             response.Append(constants.ContainersDispatchedMessage);
-            foreach (var item in list)
-            {
-                if (sumTransportCost < request.Budget && (sumTransportCost + item.TransportCost) <= request.Budget)
-                {
-                    sumTransportCost+= item.TransportCost;
-                    sumContainerPrice+=item.ContainerPrice;
-                    response.Append(constants.MiddleBar);
-                    response.Append(item.Name);
-                }
-            }
-            
-            await setStatsAsync(SetStats(request , sumContainerPrice)).ConfigureAwait(false);
-            return response.ToString();
-        }
 
+            containerList.ForEach(x =>
+            {
+                if (sumTransportCost < budget && (sumTransportCost + x.TransportCost) <= budget)
+                {
+                    sumTransportCost += x.TransportCost;
+                    sumContainerPrice += x.ContainerPrice;
+                    response.Append(constants.MiddleBar);
+                    response.Append(x.Name);
+                }
+            });
+
+
+            return (response.ToString(), sumContainerPrice);
+        }
         /// <summary>
         /// The Set Stats to add mongoBd
         /// </summary>
         /// <param name="request"></param>
         /// <param name="sumContainerPrice"></param>
         /// <returns></returns>
-        private Stats SetStats(ContainerRequest request, double sumContainerPrice)
+        private Stats CreateStatsEntity(ContainerRequest request, double sumContainerPrice)
         {
             return new Stats()
             {
@@ -88,12 +109,12 @@ namespace Ch.Kpi.Containers.Domain.Services
         /// <param name="stats"></param>
         /// <returns></returns>
         /// <exception cref="TechnicalException"></exception>
-        private async Task setStatsAsync(Stats stats)
+        private async Task SaveStatsAsync(Stats stats)
         {
             try
             {
-                var repository = this.unitOfWork.CreateRepository<Stats>();
-                repository.Add(stats);
+                var Statsrepository = this.unitOfWork.CreateRepository<Stats>();
+                Statsrepository.Add(stats);
                 await this.unitOfWork.Commit().ConfigureAwait(false);
             }
             catch (Exception ex)

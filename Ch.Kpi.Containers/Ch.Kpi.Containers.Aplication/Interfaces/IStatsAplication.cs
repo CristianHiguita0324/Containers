@@ -20,6 +20,6 @@ namespace Ch.Kpi.Containers.Aplication.Interfaces
         /// get the statistics
         /// </summary>
         /// <returns></returns>
-        Task<string> getStatisticsAsync();
+        Task<string> GetStatisticsAsync();
     }
 }

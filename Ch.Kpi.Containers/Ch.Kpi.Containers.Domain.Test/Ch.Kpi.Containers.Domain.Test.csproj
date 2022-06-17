@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ch.Kpi.Containers.Aplication\Ch.Kpi.Containers.Aplication.csproj" />
     <ProjectReference Include="..\Ch.Kpi.Containers.Domain\Ch.Kpi.Containers.Domain.csproj" />
   </ItemGroup>
 
