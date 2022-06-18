@@ -37,7 +37,7 @@ namespace Ch.Kpi.Containers.Api.Controllers
         /// </summary>
         /// <param name="Request"></param>
         /// <returns></returns>
-        [HttpGet("SelectContainers")]
+        [HttpPost("SelectContainers")]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
         [ProducesResponseType(409)]
