@@ -80,7 +80,7 @@ https://github.com/CristianHiguita0324/Containers/blob/main/Recursos/ContainersK
  
  # Stack Tecnológico Solución
  
--.NET Core 6.0 (Framework desarrollo)
+- .NET Core 6.0 (Framework desarrollo)
 - MongoBd (Dase de datos)
 - Azure (Infraestructura nube para despliegue del servicio y base de datos)
 - MSTest (Pruebas Unitarias)
