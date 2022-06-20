@@ -54,11 +54,17 @@ namespace Ch.Kpi.Containers.Domain.Services
         public async Task<string> SelectContainersAsync(ContainerRequest request)
         {
             var list = request.Containers.OrderByDescending(x => x.ContainerPrice).ThenBy(x => x.TransportCost).ToList();
-            
-            (this.response, this.sumContainerPrice) = GetContainersToShip(list, request.Budget);
 
-            await SaveStatsAsync(CreateStatsEntity(request , this.sumContainerPrice)).ConfigureAwait(false);
-            return this.response;
+            if(request.Budget >= list.Min(x=> x.TransportCost))
+            {
+                (this.response, this.sumContainerPrice) = GetContainersToShip(list, request.Budget);
+
+                await SaveStatsAsync(CreateStatsEntity(request, this.sumContainerPrice)).ConfigureAwait(false);
+                return this.response;
+            }
+            return "El presupuesto enviado no alcanza a cubrir el valos minimo de envio";
+            
+          
         }
 
         /// <summary>

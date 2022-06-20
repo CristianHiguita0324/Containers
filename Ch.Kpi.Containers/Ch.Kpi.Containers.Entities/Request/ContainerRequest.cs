@@ -15,6 +15,7 @@ namespace Ch.Kpi.Containers.Entities.Request
         /// Gets or sets the Budget.
         /// </summary>
         [Required(ErrorMessage = constants.BudgetRequired)]
+        [Range(0.1, double.MaxValue, ErrorMessage = "El valor debe ser positivo.")]
         public double Budget { get; set; }
 
         /// <summary>

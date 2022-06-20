@@ -12,5 +12,10 @@ namespace Ch.Kpi.Containers.Entities
         /// Gets the Create.
         /// </summary>
         public const string selectContainersResponse = "Los contenedores que deben ser enviados son :  - C1 - C2 - C4";
+
+        /// <summary>
+        /// Gets the Create.
+        /// </summary>
+        public const string selectContainersResponseBudgetFail = "El presupuesto enviado no alcanza a cubrir el valos minimo de envio";
     }
 }
