@@ -49,10 +49,13 @@ de los presupuestos, valor contenedores despachados y valor de contenedores no d
 https://ch-containers.azurewebsites.net/api/stats/stats
 
 -Se puede usar la coleccion de postman adjunta, para realizar su respectiva validacion.
-//Imagen Postman
+
+https://github.com/CristianHiguita0324/Containers/blob/develop/Recursos/ConsultaEstadisticasGET.JPG
+
 
 -Adicional se puede usar la documentaciòn de Swagger para consumir los servicios https://ch-containers.azurewebsites.net/swagger/index.html
-Imagen Swagger
+
+https://github.com/CristianHiguita0324/Containers/blob/develop/Recursos/Swagger%20ConsultaEstadisticas.JPG
 
 
 
