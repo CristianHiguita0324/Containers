@@ -66,10 +66,10 @@ namespace Ch.Kpi.Containers.Domain.Test
         /// ShouldInvokegetStatisticsAsync.
         /// </summary>
         [TestMethod]
-        public async Task ShouldInvokeselectContainersAsync()
+        public async Task ShouldInvokeBudgetOkselectContainersAsync()
         {
             // Arrange
-            var request = setRequest();
+            var request = SetRequest(1508.65);
             this.unitOfWorkMock.Setup(a => a.CreateRepository<Stats>()).Returns(this.mockStatsRepository.Object);
             this.MockContainerDomain.Setup(m => m.SelectContainersAsync(It.IsAny<ContainerRequest>())).ReturnsAsync(ConstantsTest.selectContainersResponse);
             // Act
@@ -83,12 +83,29 @@ namespace Ch.Kpi.Containers.Domain.Test
         /// ShouldInvokegetStatisticsAsync.
         /// </summary>
         [TestMethod]
+        public async Task ShouldInvokeBudgetFailselectContainersAsync()
+        {
+            // Arrange
+            var request = SetRequest(150.65);
+            this.unitOfWorkMock.Setup(a => a.CreateRepository<Stats>()).Returns(this.mockStatsRepository.Object);
+            this.MockContainerDomain.Setup(m => m.SelectContainersAsync(It.IsAny<ContainerRequest>())).ReturnsAsync(ConstantsTest.selectContainersResponse);
+            // Act
+            // Execute
+            var response = await this.containerDomain.SelectContainersAsync(request).ConfigureAwait(false);
+            // Assert
+            Assert.AreEqual(ConstantsTest.selectContainersResponseBudgetFail, response);
+        }
+
+        /// <summary>
+        /// ShouldInvokegetStatisticsAsync.
+        /// </summary>
+        [TestMethod]
         [ExpectedException(typeof(TechnicalException))]
         public async Task ShouldInvokeTechnicalExceptionselectContainersAsync()
         {
             // Arrange
-            var request = setRequest();
-           
+            var request = SetRequest(1508.65);
+
             this.MockContainerDomain.Setup(m => m.SelectContainersAsync(It.IsAny<ContainerRequest>())).ReturnsAsync(ConstantsTest.selectContainersResponse);
             // Act
             // Execute
@@ -99,11 +116,11 @@ namespace Ch.Kpi.Containers.Domain.Test
         /// create container entity
         /// </summary>
         /// <returns>ContainerRequest</returns>
-        private ContainerRequest setRequest()
+        private ContainerRequest SetRequest(double budget)
         {
             return new ContainerRequest()
             {
-                Budget = 1508.65,
+                Budget = budget,
                 Containers = new List<Entities.Container>()
                 {
                     new Entities.Container() { ContainerPrice = 4744.03, Name = "C1", TransportCost = 571.40},

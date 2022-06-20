@@ -20,6 +20,7 @@ namespace Ch.Kpi.Containers.Entities
         /// </summary>
         
         [Required(ErrorMessage = constants.TransportCostRequired)]
+        [Range(0.1, double.MaxValue, ErrorMessage = "El valor debe ser positivo.")]
         public double TransportCost { get; set; }
 
         /// <summary>
@@ -27,6 +28,7 @@ namespace Ch.Kpi.Containers.Entities
         /// </summary>
         /// 
         [Required(ErrorMessage = constants.ContainerPriceRequired)]
+        [Range(0.1, double.MaxValue, ErrorMessage = "El valor debe ser positivo.")]
         public double ContainerPrice { get; set; }
 
     }
