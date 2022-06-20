@@ -37,6 +37,8 @@ https://ch-containers.azurewebsites.net/api/Containers/selectContainers
 
 - Se puede usar la colección de postman adjunta, para realizar su respectiva validación.
 
+https://github.com/CristianHiguita0324/Containers/blob/main/Recursos/ContainersKpi.postman_collection.json
+
 ![image](https://github.com/CristianHiguita0324/Containers/blob/develop/Recursos/ObtenerContenedoresPOST.JPG)
 
 - Adicional se puede usar la documentación de Swagger para consumir los servicios https://ch-containers.azurewebsites.net/swagger/index.html
@@ -51,6 +53,8 @@ de los presupuestos, valor contenedores despachados y valor de contenedores no d
 https://ch-containers.azurewebsites.net/api/stats/stats
 
 - Se puede usar la colección de postman adjunta, para realizar su respectiva validación.
+
+https://github.com/CristianHiguita0324/Containers/blob/main/Recursos/ContainersKpi.postman_collection.json
 
 ![image](https://github.com/CristianHiguita0324/Containers/blob/main/Recursos/ConsultaEstadisticasGET.JPG)
 
