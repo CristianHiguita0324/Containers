@@ -1,0 +1,63 @@
+{
+	"info": {
+		"_postman_id": "71b52f5d-122d-4314-9ddd-4098c5e11de2",
+		"name": "ContainersKpi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4786019"
+	},
+	"item": [
+		{
+			"name": "Consulta Estadisticas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ch-containers.azurewebsites.net/api/stats/stats",
+					"protocol": "https",
+					"host": [
+						"ch-containers",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"stats",
+						"stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Contenedores para despacho",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"budget\": 1508.65,\r\n  \"containers\": [\r\n    {\r\n      \"name\": \"C1\",\r\n      \"transportCost\": 571.40,\r\n      \"containerPrice\": 4744.03\r\n    },\r\n    {\r\n      \"name\": \"C2\",\r\n      \"transportCost\": 537.33,\r\n      \"containerPrice\": 3579.07\r\n    },\r\n    {\r\n      \"name\": \"C3\",\r\n      \"transportCost\": 434.66,\r\n      \"containerPrice\": 1379.26\r\n    }\r\n    ,\r\n    {\r\n      \"name\": \"C4\",\r\n      \"transportCost\": 347.28,\r\n      \"containerPrice\": 1700.12\r\n    }\r\n    ,\r\n    {\r\n      \"name\": \"C5\",\r\n      \"transportCost\": 264.54,\r\n      \"containerPrice\": 1434.80\r\n\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ch-containers.azurewebsites.net/api/Containers/selectContainers",
+					"protocol": "https",
+					"host": [
+						"ch-containers",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"Containers",
+						"selectContainers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
